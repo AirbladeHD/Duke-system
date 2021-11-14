@@ -40,7 +40,7 @@ end
 if os.capture("dpkg -s mariadb-server") == "" then
   print("MariaDB Server ist nicht installiert")
 else
-  print(os.capture("dpkg -s mariadb-server"))
+  print("MariaDB Server wurde gefunden")
 end
 if os.capture("whereis phpmyadmin") == "phpmyadmin:" then
   print("phpMyAdmin wurde nicht gefunden")
@@ -58,7 +58,7 @@ end
 if os.capture('ls resources/[duke_scripts]') == "" then
     print("Git Archiv wurde nicht gefunden")
     print("Git Archiv wird geklont...")
-    os.execute('git clone -n https://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@github.com/AirbladeHD/Duke-scripts.git /root/server-data/resources/[duke_scripts]')
+    os.execute('git clone https://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@github.com/AirbladeHD/Duke-scripts.git /root/server-data/resources/[duke_scripts]')
     print("Git Archiv wurde geklont")
 else
     print("Git Archiv wurde gefunden")

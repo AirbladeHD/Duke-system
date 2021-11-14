@@ -6,5 +6,5 @@ Config.resources = {
 }
 
 Config.settings = {
-    autoReclone = false,
+    autoUpdate = false,
 }
