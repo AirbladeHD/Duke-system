@@ -48,7 +48,15 @@ else
   print("phpMyAdmin wurde gefunden")
 end
 print("Datenbankkonfiguration wird geladen...")
-os.execute('mysql --password=duke2021 --user=dukecity < /root/server-data/resources/[system]/duke_manager/duke.sql')
+if Config.settings["overwriteDatabase"] == true then
+  print("Datenbanküberschreibung ist aktiviert")
+  print("Lade letztes Backup...")
+  os.execute('chmod +x /root/server-data/resources/[system]/duke_manager/pullBackup.sh')
+  os.execute("/root/server-data/resources/[system]/duke_manager/pullBackup.sh")
+  os.execute('mysql --password=duke2021 --user=dukecity < /root/server-data/resources/[system]/duke_manager/backups/backup.sql')
+else
+  os.execute('mysql --password=duke2021 --user=dukecity < /root/server-data/resources/[system]/duke_manager/duke.sql')
+end
 print("Datenbankkonfiguration geladen")
 if os.capture('dpkg -s git-all') == "" then
   print("Git ist nicht installiert")
