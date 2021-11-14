@@ -10,4 +10,5 @@ Config.resources = {
 Config.settings = {
     autoUpdate = false,
     overwriteDatabase = false,
+    createDatabase = false,
 }
