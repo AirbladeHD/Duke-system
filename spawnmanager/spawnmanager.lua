@@ -205,6 +205,13 @@ local spawnLock = false
 
 -- spawns the current player at a certain spawn point index (or a random one, for that matter)
 function spawnPlayer(spawnIdx, cb)
+
+    local style = GetConvar("style"..GetPlayerName(PlayerId()), "Kein Style")
+    local entry = GetConvar("entry"..GetPlayerName(PlayerId()), "Fehler bei der Einreise")
+    local coords = GetConvar("coords"..GetPlayerName(PlayerId()), "Keine Koordinaten")
+    coords = json.decode(coords)
+    style = json.decode(style)
+
     if spawnLock then
         return
     end
@@ -281,11 +288,66 @@ function spawnPlayer(spawnIdx, cb)
 
         -- spawn the player
         local ped = PlayerPedId()
+        
+        if tonumber(entry) == 0 then
+            SetEntityCoordsNoOffset(ped, spawn.x, spawn.y, spawn.z, false, false, false, true)
+            NetworkResurrectLocalPlayer(spawn.x, spawn.y, spawn.z, spawn.heading, true, true, false)
+            if tonumber(style) == 0 then
+                SetEntityRotation(ped, 0, -0, 175.9685)
+                exports.duke_identity:openEditor()
+            else
+                SetPedPreloadPropData(PlayerPedId(), 0, style["face"])
+                SetPedPreloadPropData(PlayerPedId(), 2, style["hair"])
+                SetPedPreloadPropData(PlayerPedId(), 3, style["arms"])
+                SetPedPreloadPropData(PlayerPedId(), 4, style["leg"])
+                SetPedPreloadPropData(PlayerPedId(), 6, style["shoe"])
+                SetPedPreloadPropData(PlayerPedId(), 8, style["undershirt"])
+                SetPedPreloadPropData(PlayerPedId(), 11, style["torso"])
+    
+                SetPedComponentVariation(PlayerPedId(), 0, style["face"])
+                SetPedComponentVariation(PlayerPedId(), 2, style["hair"])
+                SetPedComponentVariation(PlayerPedId(), 3, style["arms"])
+                SetPedComponentVariation(PlayerPedId(), 4, style["leg"])
+                SetPedComponentVariation(PlayerPedId(), 6, style["shoe"])
+                SetPedComponentVariation(PlayerPedId(), 8, style["undershirt"])
+                SetPedComponentVariation(PlayerPedId(), 2, style["hair"], style["hairColor"])
+                SetPedComponentVariation(PlayerPedId(), 11, style["torso"])
+            end
+        else
+            if tonumber(style) == 0 then
+                SetEntityCoordsNoOffset(ped, spawn.x, spawn.y, spawn.z, false, false, false, true)
+                NetworkResurrectLocalPlayer(spawn.x, spawn.y, spawn.z, spawn.heading, true, true, false)
+                SetEntityRotation(ped, 0, -0, 175.9685)
+                exports.duke_identity:openEditor()
+            else
+                SetEntityCoordsNoOffset(ped, coords.x, coords.y, coords.z, false, false, false, true)
+                NetworkResurrectLocalPlayer(coords.x, coords.y, coords.z, spawn.heading, true, true, false)
+
+                SetPedPreloadPropData(PlayerPedId(), 0, style["face"])
+                SetPedPreloadPropData(PlayerPedId(), 2, style["hair"])
+                SetPedPreloadPropData(PlayerPedId(), 3, style["arms"])
+                SetPedPreloadPropData(PlayerPedId(), 4, style["leg"])
+                SetPedPreloadPropData(PlayerPedId(), 6, style["shoe"])
+                SetPedPreloadPropData(PlayerPedId(), 8, style["undershirt"])
+                SetPedPreloadPropData(PlayerPedId(), 11, style["torso"])
+    
+                SetPedComponentVariation(PlayerPedId(), 0, style["face"])
+                SetPedComponentVariation(PlayerPedId(), 2, style["hair"])
+                SetPedComponentVariation(PlayerPedId(), 3, style["arms"])
+                SetPedComponentVariation(PlayerPedId(), 4, style["leg"])
+                SetPedComponentVariation(PlayerPedId(), 6, style["shoe"])
+                SetPedComponentVariation(PlayerPedId(), 8, style["undershirt"])
+                SetPedComponentVariation(PlayerPedId(), 2, style["hair"], style["hairColor"])
+                SetPedComponentVariation(PlayerPedId(), 11, style["torso"])
+            end
+        end
+
+        Citizen.Wait(3000)
 
         -- V requires setting coords as well
-        SetEntityCoordsNoOffset(ped, spawn.x, spawn.y, spawn.z, false, false, false, true)
+        --SetEntityCoordsNoOffset(ped, spawn.x, spawn.y, spawn.z, false, false, false, true)
 
-        NetworkResurrectLocalPlayer(spawn.x, spawn.y, spawn.z, spawn.heading, true, true, false)
+        --NetworkResurrectLocalPlayer(spawn.x, spawn.y, spawn.z, spawn.heading, true, true, false)
 
         -- gamelogic-style cleanup stuff
         ClearPedTasksImmediately(ped)
@@ -331,6 +393,11 @@ function spawnPlayer(spawnIdx, cb)
         end
 
         spawnLock = false
+
+        --if tonumber(entry) == 0 then
+            --exports.duke_identity:openEntry(true)
+        --end
+
     end)
 end
 
