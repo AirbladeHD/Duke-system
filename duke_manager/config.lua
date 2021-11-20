@@ -3,8 +3,8 @@ Config = {}
 Config.resources = {
     "mysql-async",
     "NativeUI",
+    "loadingscreen",
     "duke_identity",
-    "duke_bank",
 }
 
 Config.settings = {
