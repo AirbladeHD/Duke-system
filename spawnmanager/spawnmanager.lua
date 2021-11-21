@@ -290,9 +290,9 @@ function spawnPlayer(spawnIdx, cb)
         local ped = PlayerPedId()
         
         if tonumber(entry) == 0 then
-            SetEntityCoordsNoOffset(ped, spawn.x, spawn.y, spawn.z, false, false, false, true)
-            NetworkResurrectLocalPlayer(spawn.x, spawn.y, spawn.z, spawn.heading, true, true, false)
             if tonumber(style) == 0 then
+                SetEntityCoordsNoOffset(ped, spawn.x, spawn.y, spawn.z, false, false, false, true)
+                NetworkResurrectLocalPlayer(spawn.x, spawn.y, spawn.z, spawn.heading, true, true, false)
                 SetEntityRotation(ped, 0, -0, 175.9685)
                 exports.duke_identity:openEditor()
             else
@@ -312,6 +312,9 @@ function spawnPlayer(spawnIdx, cb)
                 SetPedComponentVariation(PlayerPedId(), 8, style["undershirt"])
                 SetPedComponentVariation(PlayerPedId(), 2, style["hair"], style["hairColor"])
                 SetPedComponentVariation(PlayerPedId(), 11, style["torso"])
+                SetEntityCoordsNoOffset(PlayerPedId(), -1140.822, -2806.093, 27.70873, false, false, false, true)
+                NetworkResurrectLocalPlayer(-1140.822, -2806.093, 27.70873, spawn.heading, true, true, false)
+                SetEntityRotation(PlayerPedId(), 0, -0, -126.9268)
             end
         else
             if tonumber(style) == 0 then
