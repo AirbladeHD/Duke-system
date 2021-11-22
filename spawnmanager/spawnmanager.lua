@@ -260,6 +260,12 @@ function spawnPlayer(spawnIdx, cb)
         -- freeze the local player
         freezePlayer(PlayerId(), true)
 
+        if tonumber(style) ~= 0 then
+            if style["gender"] == "female" then
+                spawn.model = "mp_f_freemode_01"
+            end
+        end
+
         -- if the spawn has a model set
         if spawn.model then
             RequestModel(spawn.model)
@@ -294,7 +300,7 @@ function spawnPlayer(spawnIdx, cb)
                 SetEntityCoordsNoOffset(ped, spawn.x, spawn.y, spawn.z, false, false, false, true)
                 NetworkResurrectLocalPlayer(spawn.x, spawn.y, spawn.z, spawn.heading, true, true, false)
                 SetEntityRotation(ped, 0, -0, 175.9685)
-                exports.duke_identity:openEditor()
+                exports.duke_identity:start()
             else
                 SetPedPreloadPropData(PlayerPedId(), 0, style["face"])
                 SetPedPreloadPropData(PlayerPedId(), 2, style["hair"])
@@ -321,7 +327,7 @@ function spawnPlayer(spawnIdx, cb)
                 SetEntityCoordsNoOffset(ped, spawn.x, spawn.y, spawn.z, false, false, false, true)
                 NetworkResurrectLocalPlayer(spawn.x, spawn.y, spawn.z, spawn.heading, true, true, false)
                 SetEntityRotation(ped, 0, -0, 175.9685)
-                exports.duke_identity:openEditor()
+                exports.duke_identity:start()
             else
                 SetEntityCoordsNoOffset(ped, coords.x, coords.y, coords.z, false, false, false, true)
                 NetworkResurrectLocalPlayer(coords.x, coords.y, coords.z, spawn.heading, true, true, false)
