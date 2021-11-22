@@ -78,7 +78,8 @@ if Config.settings['autoUpdate'] == false then
 else
     print("Automatisches Updaten ist eingeschaltet")
     print("Git Archiv wird geupdated...")
-    os.execute("cd resources/[duke_scripts] && git fetch && git pull origin main")
+    os.execute("cd resources/[duke_scripts] && git stash push --include-untracked && git stash drop")
+    os.execute("git fetch && git pull origin main")
     print("Git Archiv wurde geupdated")
 end
 print("Ressourcen werden gestartet...")
