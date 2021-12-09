@@ -6,7 +6,7 @@ preCompose = lua.eval('''
         raw = ""
         bytes = ""
         factor = 1
-        byteLen = 256
+        byteLen = 1024
 
         for i = 1, #text, 1 do
             raw = raw..string.byte(text, i)
@@ -62,13 +62,12 @@ preCompose = lua.eval('''
 
 blockify = lua.eval('''
     function(text)
-        blockCount = #text / 16
         blocks = {}
         index = 1
-        for i = 1, blockCount, 1 do
-            block = string.sub(text, i, i + 16)
-            index = index + 16
-            table.insert(blocks, block)
+        for i = 1, 33, 1 do
+            block = string.sub(text, index, index + 32)
+            index = index + 32
+            table.insert(blocks, tonumber(block))
         end
         return blocks
     end
@@ -112,9 +111,13 @@ binarySwitcher = lua.eval('''
             bin = bin.."1"
             bin = string.reverse(bin)
             block = bin
-
             while #block < 64 do
                 block = block.."0"
+            end
+            while #block > 64 do
+                block = string.reverse(block)
+                block = string.gsub(block, "0", "", 1)
+                block = string.reverse(block)
             end
             blocks[i] = block
         end
@@ -152,37 +155,43 @@ shifter = lua.eval('''
 shuffle = lua.eval('''
     function(blocks)
         newBlocks = {}
-        factors = {8, 9, 1, 0, 8, 1, 0, 1, 1, 1, 0, 1, 0, 5, 9, 7}
+        oldBlocks = {}
+        factors = {8, 9, 1, 0, 8, 1, 0, 1, 1, 1, 0, 1, 0, 5, 9, 7, 7, 9, 5, 0, 1, 0, 1, 1, 1, 0, 1, 8, 0, 1, 9, 8}
         for i = 1, #blocks, 1 do
-            factor = factors[i]
-            shifted = blocks[i]
+            if math.fmod(i, 2) == 0 then
+                factor = factors[i]
+                shifted = blocks[i]
 
-            chars = {}
-            newBin = ""
-            counter = 0
-            for i = 1, #shifted, 1 do
-                table.insert(chars, string.sub(shifted, i, i))
-            end
-            while counter ~= factor do
-                for i = 1, #chars, 1 do
-                    c = i + 1
-                    if c > #chars then
-                        c = 1
-                    end
-                    chars[i] = chars[c]
+                chars = {}
+                newBin = ""
+                counter = 0
+                for i = 1, #shifted, 1 do
+                    table.insert(chars, string.sub(shifted, i, i))
                 end
-                counter = counter + 1
+                while counter ~= factor do
+                    for i = 1, #chars, 1 do
+                        c = i + 1
+                        if c > #chars then
+                            c = 1
+                        end
+                        chars[i] = chars[c]
+                    end
+                    counter = counter + 1
+                end
+
+                for i = 1, #chars, 1 do
+                    newBin = newBin..chars[i]
+                end
+
+                shifted = newBin
+
+                table.insert(newBlocks, shifted)
+            else
+                table.insert(oldBlocks, blocks[i])
             end
-
-            for i = 1, #chars, 1 do
-                newBin = newBin..chars[i]
-            end
-
-            shifted = newBin
-
-            table.insert(newBlocks, shifted)
         end
-        return newBlocks
+
+        return newBlocks, oldBlocks
     end
 ''')
 
@@ -212,21 +221,19 @@ lXOR = lua.eval('''
             bin1 = list1[i]
             bin2 = list2[i]
             newBin = ""
-            for i = 1, #bin1, 1 do
-                if string.sub(bin1, i, i) == "1" then
-                    newBin = newBin.."1"
+            for c = 1, #bin1, 1 do
+                if string.sub(bin1, c, c) == "1" and string.sub(bin2, c, c) == "1" then
+                    newBin = newBin.."0"
                 else
-                    if string.sub(bin2, i, i) == "1" then
+                    if string.sub(bin1, c, c) == "1" or string.sub(bin2, c, c) == "1" then
                         newBin = newBin.."1"
                     else
                         newBin = newBin.."0"
                     end
                 end
             end
-
-            XOR = newBin
-
             table.insert(newBins, newBin)
+
         end
         return newBins
     end
@@ -310,18 +317,18 @@ preHash = lua.eval('''
 ''')
 
 def dukeHash(string):
-    preHashed = preCompose(string)
-    blocks = blockify(preHashed)
-    binaryBlocks = binarySwitcher(blocks)
-    switched = shuffle(binaryBlocks)
-    logicalXOR = lXOR(binaryBlocks, switched)
-    decimal = toDecimal(logicalXOR)
-    process = processor(decimal)
-    composed = preCompose(process)
+    #preHashed = preCompose(string)
+    #blocks = blockify(preHashed)
+    #binaryBlocks = binarySwitcher(blocks)
+    #switched = shuffle(binaryBlocks)
+    #logicalXOR = lXOR(binaryBlocks, switched)
+    #decimal = toDecimal(logicalXOR)
+    #process = processor(decimal)
+    composed = preCompose(string)
     blocks = blockify(composed)
     binaryBlocks = binarySwitcher(blocks)
-    switched = shuffle(binaryBlocks)
-    logicalXOR = lXOR(binaryBlocks, switched)
+    switched, nonSwitched = shuffle(binaryBlocks)
+    logicalXOR = lXOR(nonSwitched, switched)
     decimal = toDecimal(logicalXOR)
     hex = "duke$" + str(processor(decimal))
 
