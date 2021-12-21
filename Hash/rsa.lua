@@ -161,6 +161,28 @@ function recreate_key(timestamp)
     return bytes
 end
 
+function partEncode(part)
+    toEncode = tostring(part)
+    encoded = ""
+    for i = 1, #toEncode, 2 do
+        encoded = encoded..string.char(tonumber(string.sub(toEncode, i, i+1)))
+    end
+    return encoded
+end
+
+function partDecode(part)
+    toDecode = tostring(part)
+    decoded = ""
+    for i = 1, #toDecode do
+        currentDecode = string.byte(toDecode, i, i)
+        while #tostring(currentDecode) < 2 do
+            currentDecode = "0"..currentDecode
+        end
+        decoded = decoded..currentDecode
+    end
+    return decoded
+end
+
 function encode(msg, receiver)
     key, timestamp = keygen(receiver, "license:a91358285645d2f4a985e9a0fe1a26f90d4713f4")
     chars = {}
@@ -171,7 +193,9 @@ function encode(msg, receiver)
     chiff = {}
     ceil = math.ceil(math.sqrt(key))
     for i = 1, #chars do
-        table.insert(chiff, chars[i]+ceil)
+        encoded = partEncode(chars[i]+ceil)
+        print(chars[i]+ceil)
+        table.insert(chiff, encoded)
     end
     return chiff, timestamp
 end
@@ -181,7 +205,8 @@ function decode(chiff, timestamp)
     msg = ""
     ceil = math.ceil(math.sqrt(key))
     for i = 1, #chiff do
-        current = chiff[i]-ceil
+        currentChiff = tonumber(partDecode(chiff[i]))
+        current = currentChiff-ceil
         if current > 255 then
             current = 255
         end
@@ -193,8 +218,9 @@ function decode(chiff, timestamp)
     return msg
 end
 
-message = "Hello World"
+message = "Ich bin cool und du bist schwul"
 enc, timestamp = encode(message, "AirbladeHD")
+print("")
 char = ""
 for i = 1, #enc do
     char = char..enc[i].." "
