@@ -1,4 +1,4 @@
-Citizen.CreateThread(function(),
+Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
         SetPedDensityMultiplierThisFrame(0.0)
@@ -6,6 +6,5 @@ Citizen.CreateThread(function(),
         SetRandomVehicleDensityMultiplierThisFrame(0.0)
         SetParkedVehicleDensityMultiplierThisFrame(0.0)
         SetVehicleDensityMultiplierThisFrame(0.0)
-        print("Test")
     end
 end)
