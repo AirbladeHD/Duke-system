@@ -54,9 +54,9 @@ if Config.settings["createDatabase"] == true then
     print("Lade letztes Backup...")
     os.execute('chmod +x /root/server-data/resources/[system]/duke_manager/pullBackup.sh')
     os.execute("/root/server-data/resources/[system]/duke_manager/pullBackup.sh")
-    os.execute('mysql --password=duke2021 --user=dukecity < /root/server-data/resources/[system]/duke_manager/backups/backup.sql')
+    os.execute('mysql --password= --user= < /root/server-data/resources/[system]/duke_manager/backups/backup.sql')
   else
-    os.execute('mysql --password=duke2021 --user=dukecity < /root/server-data/resources/[system]/duke_manager/duke.sql')
+    os.execute('mysql --password= --user= < /root/server-data/resources/[system]/duke_manager/duke.sql')
   end
 print("Datenbankkonfiguration geladen")
 end
@@ -68,7 +68,7 @@ end
 if os.capture('ls resources/[duke_scripts]') == "" then
     print("Git Archiv wurde nicht gefunden")
     print("Git Archiv wird geklont...")
-    os.execute('git clone https://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@github.com/AirbladeHD/Duke-scripts.git /root/server-data/resources/[duke_scripts]')
+    os.execute('git clone https://@github.com/AirbladeHD/Duke-scripts.git /root/server-data/resources/[duke_scripts]')
     print("Git Archiv wurde geklont")
 else
     print("Git Archiv wurde gefunden")
