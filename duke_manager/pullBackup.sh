@@ -1,4 +1,4 @@
-git clone -n https://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@github.com/AirbladeHD/Duke-system.git /root/server-data/resources/temp
+git clone -n #link to repo /root/server-data/resources/temp
 cd /root/server-data/resources/temp
 git checkout HEAD backups
 cd /root/server-data/resources/temp/backups/latest
