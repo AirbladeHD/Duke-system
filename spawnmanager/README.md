@@ -1,4 +1,4 @@
-###fxmanifest.lua
+### fxmanifest.lua
 
 Die Datei "fxmanifest.lua" ist ein wichtiger Bestandteil jeder FiveM-Ressource, da sie Informationen über die Ressource bereitstellt und dem Server mitteilt, wie die Ressource geladen und verwendet werden soll.
 
@@ -18,7 +18,7 @@ Die Datei "fxmanifest.lua" ist ein wichtiger Bestandteil jeder FiveM-Ressource, 
 
 - rdr3_warning: Eine Warnung, dass diese Ressource eine Vorabversion für RedM ist und möglicherweise inkompatibel wird, sobald RedM offiziell veröffentlicht wird.
 
-###spawnmanager.lua
+### spawnmanager.lua
 
 Die Datei "spawnmanager.lua" enthält den eigentlichen Code, der das Spawning der Spieler behandelt. Hier ist eine detaillierte Erläuterung der wichtigsten Teile des Skripts:
 
