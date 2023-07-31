@@ -1,33 +1,15 @@
-## Brute-Force-Angriff und eigener Hash-Algorithmus (GTA 5 RP Server)
+# Duke-system Repository
 
-Dieser Ordner enthält Python- und Lua-Skripte für einen Brute-Force-Angriff und die Implementierung meines eigenen Hash-Algorithmus, der für einen GTA 5 RP Server entwickelt wurde.
+Dieses Repository enthält verschiedene Ressourcen und Dateien, die für das Duke-system auf einem GTA 5 Server mit FiveM verwendet werden. Im Folgenden sind die Ordner und ihre Funktionen aufgeführt:
 
-### Hintergrund:
+## 1. Hash
+In diesem Ordner befinden sich die Skripte für einen eigenen Hash-Algorithmus. Dieser Algorithmus wird für bestimmte Funktionen und Features auf dem GTA 5 Server verwendet.
 
-Dieses Projekt entstand als Versuch, einen eigenen Hash-Algorithmus namens "Duke-Hash" für einen GTA 5 RP Server zu entwickeln. Der Duke-Hash sollte als alternative Methode zur Verarbeitung von Passwörtern und anderen sensiblen Informationen dienen.
+## 2. backups
+Hier werden regelmäßige Sicherungsdateien Ihrer Ressourcen gespeichert. Wenn der Server neu startet, werden Backups erstellt, um frühere Versionen wiederherstellen zu können, falls erforderlich.
 
-### Dateien:
+## 3. duke_manager
+Dieser Ordner enthält die Hauptressource "duke_manager", die verschiedene Funktionen und Features für den GTA 5 Server bereitstellt. Dazu gehören Identitätsmanagement, Charaktererstellung und andere serverseitige Aufgaben.
 
-1. `bruteforce.py`: Führt einen Brute-Force-Angriff durch, um die Nonce zu finden, die den angegebenen Nonce-Hash unter Verwendung des Duke-Hash-Algorithmus erzeugt.
-
-2. `hash.lua`: Enthält die Implementierung des Duke-Hash-Algorithmus zur Berechnung des Hashwerts eines Textes.
-
-3. `luaTest.py`: Ein Testskript, das die Funktionen des Duke-Hash-Algorithmus mithilfe der Lupa-Bibliothek überprüft.
-
-4. `ras.lua`: Enthält einfache Funktionen zur Schlüsselerzeugung und Verschlüsselung/Entschlüsselung mithilfe eines RSA-ähnlichen Algorithmus.
-
-5. `srsa.lua`: Enthält Funktionen zur Erzeugung von Zufallszahlen, Überprüfung von Primzahlen und Erzeugung eines einfachen RSA-ähnlichen Schlüsselpaars.
-
-### Verwendung:
-
-1. Führen Sie `bruteforce.py` aus, um den Brute-Force-Angriff zu starten und die Nonce zu finden, die den angegebenen Nonce-Hash unter Verwendung des Duke-Hash-Algorithmus erzeugt.
-
-2. Der selbst entwickelte Duke-Hash-Algorithmus ist in `hash.lua` implementiert und kann in Lua-Skripten verwendet werden.
-
-3. Verwenden Sie `luaTest.py`, um die Lua-Funktionen des Duke-Hash-Algorithmus zu testen.
-
-4. `ras.lua` enthält einfache RSA-ähnliche Funktionen zur Schlüsselerzeugung und Verschlüsselung/Entschlüsselung.
-
-5. `srsa.lua` enthält Funktionen zur Erzeugung eines einfachen RSA-ähnlichen Schlüsselpaars.
-
-Hinweis: Obwohl ich mein Bestes getan habe, um einen eigenen Hash-Algorithmus zu entwickeln, ist es wichtig zu betonen, dass die Sicherheitsalgorithmen in diesem Projekt nicht für den Einsatz in realen Sicherheitsanwendungen geeignet sind. Der Duke-Hash-Algorithmus wurde aufgrund meiner begrenzten Möglichkeiten nicht gründlich genug getestet und sollte nicht als Ersatz für etablierte kryptografische Verfahren verwendet werden.
+## 4. spawnmanager
+In diesem Ordner befindet sich die "spawnmanager.lua"-Datei, die Teil der "spawnmanager"-Ressource ist. Die "spawnmanager"-Ressource behandelt das einheitliche Spawning von Spielern, um die Notwendigkeit für individuelle Spawnauswahl-Logik in anderen Ressourcen zu verhindern.
