@@ -1,6 +1,6 @@
 ## Zusammenfassung des duke-manager Script-Pakets
 
-Das Duke City Script-Paket ist eine umfassende Sammlung von Lua-Skripten und Konfigurationsdateien für den Duke GTA 5 RP Server. Es bietet eine Vielzahl von Funktionen und Features, die dazu dienen, das Spielerlebnis zu verbessern, die Spielwelt zu verwalten und die Verwendung von Ressourcen zu optimieren. Nachfolgend sind die wichtigsten Komponenten und Funktionen des Pakets detailliert beschrieben:
+Das duke-manager Script-Paket ist eine umfassende Sammlung von Lua-Skripten und Konfigurationsdateien für den Duke GTA 5 RP Server. Es bietet eine Vielzahl von Funktionen und Features, die dazu dienen, das Spielerlebnis zu verbessern, die Spielwelt zu verwalten und die Verwendung von Ressourcen zu optimieren. Nachfolgend sind die wichtigsten Komponenten und Funktionen des Pakets detailliert beschrieben:
 
 ### client.lua
 
@@ -45,11 +45,11 @@ Die `duke.sql`-Datei enthält das Grundgerüst der Datenbank für den Duke GTA 5
 
 - `vehicles`: Hier werden Informationen zu Fahrzeugen im Spiel gespeichert, wie Besitzer, Name, Hersteller, Kategorie, Konfiguration und Upgrades.
 
-Die `duke.sql`-Datei bildet die Grundlage für die Datenbankverwaltung im Duke City Script-Paket und ermöglicht eine effiziente Speicherung und Verwaltung von Spielinformationen.
+Die `duke.sql`-Datei bildet die Grundlage für die Datenbankverwaltung im duke-manager Script-Paket und ermöglicht eine effiziente Speicherung und Verwaltung von Spielinformationen.
 
 ### fxmanifest.lua
 
-Die `fxmanifest.lua`-Datei ist eine wichtige Konfigurationsdatei für das FiveM Resource Manifest. Sie enthält Informationen, die dem FiveM-Server mitteilen, welche Dateien und Skripte in der Ressource enthalten sind und wie sie geladen werden sollen. Im Fall des Duke City Script-Pakets enthält diese Datei:
+Die `fxmanifest.lua`-Datei ist eine wichtige Konfigurationsdatei für das FiveM Resource Manifest. Sie enthält Informationen, die dem FiveM-Server mitteilen, welche Dateien und Skripte in der Ressource enthalten sind und wie sie geladen werden sollen. Im Fall des duke-manager Script-Pakets enthält diese Datei:
 
 - `fx_version 'bodacious'`: Gibt die FiveM Resource Manifest-Version an, mit der diese Ressource kompatibel ist.
 
