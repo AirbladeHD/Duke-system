@@ -1,4 +1,4 @@
-## Zusammenfassung des Duke City Script-Pakets
+## Zusammenfassung des duke-manager Script-Pakets
 
 Das Duke City Script-Paket ist eine umfassende Sammlung von Lua-Skripten und Konfigurationsdateien für den Duke GTA 5 RP Server. Es bietet eine Vielzahl von Funktionen und Features, die dazu dienen, das Spielerlebnis zu verbessern, die Spielwelt zu verwalten und die Verwendung von Ressourcen zu optimieren. Nachfolgend sind die wichtigsten Komponenten und Funktionen des Pakets detailliert beschrieben:
 
